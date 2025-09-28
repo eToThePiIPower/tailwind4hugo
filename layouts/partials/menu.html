@@ -11,10 +11,15 @@ Renders a menu for the given menu ID.
 {{- $menuID := .menuID }}
 
 {{- with index site.Menus $menuID }}
-  <nav>
-    <ul>
-      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
-    </ul>
+  <nav class="navbar bg-base-100 shadow-sm">
+    <div class="flex-1">
+      <a class="btn btn-ghost text-xl" href="">{{ site.Title }}</a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+      </ul>
+    </div>
   </nav>
 {{- end }}
 
@@ -34,18 +39,30 @@ Renders a menu for the given menu ID.
       {{- end }}
     {{- end }}
     <li>
-      <a
-        {{- range $k, $v := $attrs }}
-          {{- with $v }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+      {{ if .Children }}
+        <details>
+          <summary
+            {{- range $k, $v := $attrs }}
+              {{- with $v }}
+                {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+              {{- end }}
+            {{- end -}}
+          >{{ $name }}</summary>
+          {{- with .Children }}
+            <ul class="bg-base-100 rounded-t-none p-2">
+              {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+            </ul>
           {{- end }}
-        {{- end -}}
-      >{{ $name }}</a>
-      {{- with .Children }}
-        <ul>
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
-        </ul>
-      {{- end }}
+        </details>
+      {{ else }}
+        <a
+          {{- range $k, $v := $attrs }}
+            {{- with $v }}
+              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+            {{- end }}
+          {{- end -}}
+        >{{ $name }}</a>
+      {{ end }}
     </li>
   {{- end }}
 {{- end }}

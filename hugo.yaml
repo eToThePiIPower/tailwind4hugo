@@ -13,6 +13,15 @@ menus:
     - name: 'Tags'
       pageRef: '/tags'
       weight: 30
+    - identifier: dropdown
+      name: "Dropdown"
+      weight: 40
+    - name: "Item 1"
+      parent: "dropdown"
+      url: "#"
+    - name: "Item 2"
+      parent: "dropdown"
+      url: "#"
 
 build:
   buildStats:
