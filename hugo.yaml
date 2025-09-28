@@ -1,6 +1,7 @@
 baseURL: 'https://example.org/'
 languageCode: 'en-US'
 title: 'My New Hugo Site'
+copyright: "Copyright © 2015–2025 My Name. All rights reserved."
 
 menus:
   main:
@@ -23,6 +24,15 @@ menus:
       parent: "dropdown"
       url: "#"
 
+params:
+  footer:
+    github: https://github
+    linkedin: https://linkedin
+    twitter: https://twitter
+    bluesky: https://bsky
+    facebook: https://facebook
+    instagram: https://insta
+
 build:
   buildStats:
     enable: true
@@ -31,6 +41,7 @@ build:
     target: css
   - source: (postcss|tailwind)\.config\.js
     target: css
+
 module:
   mounts:
   - source: assets

@@ -1,1 +1,13 @@
-<p>Copyright {{ now.Year }}. All rights reserved.</p>
+<footer class="footer md:footer-horizontal bg-neutral text-neutral-content items-center p-8">
+  <aside class="grid-flow-col items-center">
+    <p>{{ site.Copyright }}</p>
+  </aside>
+  <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+    {{ partial "footer/socials/github.html" }}
+    {{ partial "footer/socials/linkedin.html" }}
+    {{ partial "footer/socials/twitter.html" }}
+    {{ partial "footer/socials/bluesky.html" }}
+    {{ partial "footer/socials/facebook.html" }}
+    {{ partial "footer/socials/instagram.html" }}
+  </nav>
+</footer>
