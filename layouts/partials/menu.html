@@ -12,13 +12,23 @@ Renders a menu for the given menu ID.
 
 {{- with index site.Menus $menuID }}
   <nav class="navbar bg-base-100 shadow-sm">
-    <div class="flex-1">
+    <div class="navbar-start">
       <a class="btn btn-ghost text-xl" href="">{{ site.Title }}</a>
     </div>
-    <div class="flex-none">
-      <ul class="menu menu-horizontal px-1">
+    <div class="navbar-end">
+      <ul class="menu menu-horizontal px-1 hidden md:flex">
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
       </ul>
+
+      <div class="dropdown md:hidden static">
+        <div tabindex="0" role="button" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-md dropdown-content bg-base-200 left-0
+          rounded-box z-1 mt-3 w-full p-2 shadow">
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        </ul>
+      </div>
     </div>
   </nav>
 {{- end }}
@@ -49,7 +59,7 @@ Renders a menu for the given menu ID.
             {{- end -}}
           >{{ $name }}</summary>
           {{- with .Children }}
-            <ul class="bg-base-100 rounded-t-none p-2">
+            <ul class="bg-base-200 shadow-sm rounded-t-none p-2">
               {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
             </ul>
           {{- end }}
